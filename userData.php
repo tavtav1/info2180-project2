@@ -10,7 +10,7 @@ if(isset($_POST['submit_form']))
 	$date_joined = date("Y.m.d");
 
 	$connect = new PDO('mysql:host = localhost; dbname= bugme;', 'root','');
-	$insertData = "INSERT INTO Users(firstname,lastname,password,email,date_joined) VALUES('$fname','$lname','$password','$email','$date_joined')";
+	$insertData = "INSERT INTO Users(firstname,lastname,password,email,date_joined) VALUES('$fname','$lname','$password_digest','$email','$date_joined')";
 	$stmt = $connect->query($insertData);
 	
 }

@@ -25,4 +25,4 @@ CREATE table Issues(
 	PRIMARY KEY(id),
 	FOREIGN KEY(created_by) REFERENCES Users(id)
 );
-INSERT INTO Users VALUES('00','David','Luiz',PASSWORD('password123'),'admin@project2.com',CURRENT_DATE());
+INSERT INTO Users VALUES('00','David','Luiz',old_password('password123'),'admin@project2.com',CURRENT_DATE());
