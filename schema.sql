@@ -1,0 +1,28 @@
+CREATE DATABASE if not exists bugme;
+USE bugme;
+
+CREATE table Users(
+	id                INT,
+	firstname VARCHAR(15),
+	lastname  VARCHAR(15),
+	password  VARCHAR(30),
+	email     VARCHAR(40),
+	date_joined DATETIME,
+	PRIMARY KEY(id)
+);
+
+CREATE table Issues(
+	id             INT,
+	title  VARCHAR(40),
+	description   text,
+	type   VARCHAR(10),
+	priority VARCHAR(),
+	status   VARCHAR(),
+	assigned_to    INT,
+	created_by     INT,
+	created   DATETIME,
+	updated   DATETIME,
+	PRIMARY KEY(id),
+	FOREIGN KEY(created_by) REFERENCES Users(id)
+);
+INSERT INTO Users VALUES('00','David','Luiz',PASSWORD('password123'),'admin@project2.com',CURRENT_DATE());
