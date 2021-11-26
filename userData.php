@@ -12,7 +12,7 @@ $date_joined = date("Y.m.d");
 require_once 'dbconfig.php';
 try{
 	$conn = new PDO("mysql:host = $host; dbname=$dbname", $username,$password);
-	echo ( "Connected to $dbname at $host successfully.");
+	header( "Location: register.html");
 	$conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		} catch (PDOException $pe) {
