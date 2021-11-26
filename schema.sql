@@ -2,10 +2,10 @@ CREATE DATABASE if not exists bugme;
 USE bugme;
 
 CREATE table Users(
-	id                INT,
+	id        INT AUTO_INCREMENT NOT NULL,
 	firstname VARCHAR(15),
 	lastname  VARCHAR(15),
-	password  VARCHAR(30),
+	password  VARCHAR(255),
 	email     VARCHAR(40),
 	date_joined DATETIME,
 	PRIMARY KEY(id)
