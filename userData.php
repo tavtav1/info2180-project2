@@ -8,16 +8,80 @@ $email= $_POST['email'];
 $password_digest = password_hash($password, PASSWORD_DEFAULT);
 $date_joined = date("Y.m.d");
 
+$fnameErr = $lnameErr = $passwordErr = $emailErr="";
 
-require_once 'dbconfig.php';
-try{
-	$conn = new PDO("mysql:host = $host; dbname=$dbname", $username,$password);
-	header( "Location: register.html");
-	$conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// DECLARE ARRAY TO STORE ERRORS
+$err = array();
 
-		} catch (PDOException $pe) {
-	    die("Could not connect to the database $dbname :" . $pe->getMessage());
+// NESTED-IF STATEMENT TO PERFORM VALIDATION OF DATA  
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+	// CHECKS IF FIELD IS EMPTY
+	if (empty($_POST["fname"])) 
+	{
+		// PRINTS ERROR STATEMENT
+		$fnameErr = "Please enter First Name";
+		// INSERTS ERROR INTO ARRRAY
+		array_push($err, $fnameErr);
+			echo nl2br ("$fnameErr\r\n");
 	}
+
+	// CHECKS IF FIELD IS EMPTY
+  	if (empty($_POST["lname"])) 
+  	{
+  		// PRINTS ERROR STATEMENT
+		$lnameErr = "Please enter Last Name";
+		// INSERTS ERROR INTO ARRRAY
+		array_push($err, $lnameErr);
+			echo nl2br ("$lnameErr\r\n") ;
+	}
+
+	// CHECKS IF FIELD IS EMPTY
+    if (empty($_POST["email"]))
+    {
+    	// PRINTS ERROR STATEMENT
+		$emailErr = "Please enter Email";
+		// INSERTS ERROR INTO ARRRAY
+		array_push($err, $emailErr);
+			echo nl2br ("$emailErr \r\n") ;
+	}
+
+	// CHECKS IF FIELD IS EMPTY
+    if (empty($_POST["Password"])) 
+    {
+    	// PRINTS ERROR STATEMENT
+		$Polling_stnErr = "Please enter Password";
+		// INSERTS ERROR INTO ARRRAY
+		array_push($err, $PasswordErr);
+			echo nl2br ("$PasswordErr \r\n");
+	}else 
+	{
+		// CHECKS IF VALUE WAS NOT ALPHANUMERIC 
+		if(!preg_match("/^[a-zA-Z0-9]*$/", $password))
+		{
+			// PRINTS ERROR STATEMENT
+			$passwordErr= "Password Should only Contain Alpha-Numerical Data";
+			// INSERTS ERROR INTO ARRRAY
+			array_push($err, $passwordErr);
+				echo nl2br("$passwordErr \r\n");
+		}else{
+			$password = $_POST["password"];
+		}
+	}
+}	
+
+// CHECKS ERROR ARRAY AND IF EMPTY CONNECTS TO DATABASE
+if (sizeof($err)==0) {
+	require_once 'dbconfig.php';
+	try{
+		$conn = new PDO("mysql:host = $host; dbname=$dbname", $username,$password);
+		header( "Location: register.html");
+		$conn ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			} catch (PDOException $pe) {
+		    die("Could not connect to the database $dbname :" . $pe->getMessage());
+		}
+}
 
 $insertData = "INSERT INTO Users(firstname,lastname,password,email,date_joined) VALUES('$fname','$lname','$password_digest','$email','$date_joined')";
 
