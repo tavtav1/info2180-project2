@@ -1,5 +1,6 @@
 <?php
-$id = '1';
+
+$id = '';
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $password= $_POST['password'];
@@ -16,57 +17,46 @@ $err = array();
 // NESTED-IF STATEMENT TO PERFORM VALIDATION OF DATA  
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
+	try {
 	// CHECKS IF FIELD IS EMPTY
 	if (empty($_POST["fname"])) 
 	{
-		// PRINTS ERROR STATEMENT
-		$fnameErr = "Please enter First Name";
 		// INSERTS ERROR INTO ARRRAY
 		array_push($err, $fnameErr);
-			echo nl2br ("$fnameErr\r\n");
 	}
 
 	// CHECKS IF FIELD IS EMPTY
   	if (empty($_POST["lname"])) 
   	{
-  		// PRINTS ERROR STATEMENT
-		$lnameErr = "Please enter Last Name";
 		// INSERTS ERROR INTO ARRRAY
 		array_push($err, $lnameErr);
-			echo nl2br ("$lnameErr\r\n") ;
 	}
 
 	// CHECKS IF FIELD IS EMPTY
     if (empty($_POST["email"]))
     {
-    	// PRINTS ERROR STATEMENT
-		$emailErr = "Please enter Email";
 		// INSERTS ERROR INTO ARRRAY
 		array_push($err, $emailErr);
-			echo nl2br ("$emailErr \r\n") ;
 	}
 
 	// CHECKS IF FIELD IS EMPTY
     if (empty($_POST["Password"])) 
     {
-    	// PRINTS ERROR STATEMENT
-		$Polling_stnErr = "Please enter Password";
 		// INSERTS ERROR INTO ARRRAY
 		array_push($err, $PasswordErr);
-			echo nl2br ("$PasswordErr \r\n");
 	}else 
 	{
 		// CHECKS IF VALUE WAS NOT ALPHANUMERIC 
 		if(!preg_match("/^[a-zA-Z0-9]*$/", $password))
 		{
-			// PRINTS ERROR STATEMENT
-			$passwordErr= "Password Should only Contain Alpha-Numerical Data";
 			// INSERTS ERROR INTO ARRRAY
 			array_push($err, $passwordErr);
-				echo nl2br("$passwordErr \r\n");
 		}else{
 			$password = $_POST["password"];
 		}
+	}
+} catch ( \Exception $e) {
+	header( "Location: register.html");
 	}
 }	
 
@@ -86,3 +76,4 @@ if (sizeof($err)==0) {
 $insertData = "INSERT INTO Users(firstname,lastname,password,email,date_joined) VALUES('$fname','$lname','$password_digest','$email','$date_joined')";
 
 $conn->exec($insertData);
+
