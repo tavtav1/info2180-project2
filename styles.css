@@ -17,6 +17,13 @@ body{
   height: 50px;
   padding: 5px;
 }
+
+a h3{
+    position: relative;
+    top: -23px;
+    color: white;
+}
+
 .nav-panel{
   background-color: lightgray;
   height: 100%;
@@ -24,7 +31,9 @@ body{
 h1{
   font-size: 36px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+    margin-left: 10px;
+    
 }
 h2{
   margin-bottom: 1px;
@@ -32,7 +41,7 @@ h2{
   color:#48BB78;
 }
 h3{
-  color:#white;
+  color: #white;
   font-size: 16px;
 }
 .main, form, label{
@@ -45,4 +54,23 @@ h3{
 a{
   padding: 20px;
   text-decoration: none;
+}
+
+#submit{
+    background-color: royalblue;
+    color: white;
+    border-radius: 4px;
+    width: 75%;
+    border: none;
+    padding: 5px;
+    margin: 10px;
+}
+
+.main input{
+    width: 150%;
+    background-color: lightgrey;
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 10px;
 }
